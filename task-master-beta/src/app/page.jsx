@@ -1,10 +1,47 @@
+'use client'
+import { useState } from "react";
+
+import CadForm from "@/components/CadForm/CadForm";
 import PageDefault from "@/components/PageDefault/PageDefault";
+import Tasks from "@/components/Tasks/Tasks";
 
 
 export default function Home() {
+  const [tasksData, setTasksData] = useState([
+    {
+      id: 1,
+      titulo: 'Título teste 001',
+      descricao: 'Descrição teste 001',
+      categoria: 'Trabalho',
+      prazo: '25/01/2025',
+      responsavel: 'Victor'
+    },
+    {
+      id: 2,
+      titulo: 'Título teste 002',
+      descricao: 'Descrição teste 002',
+      categoria: 'Pessoal',
+      prazo: '25/01/2025',
+      responsavel: 'Mateus'
+    },
+    {
+      id: 3,
+      titulo: 'Título teste 003',
+      descricao: 'Descrição teste 003',
+      categoria: 'Estudos',
+      prazo: '25/01/2025',
+      responsavel: 'Lucas'
+    }
+  ]);
+
+  function cadTaks(inputValue) {
+    console.log(inputValue);
+  }
+
   return (
     <PageDefault title='Cadastro'>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod earum nihil architecto iste illo accusantium itaque eum. Explicabo ab voluptate ducimus atque esse illum maxime temporibus, blanditiis numquam reprehenderit architecto.</p>
+      <CadForm onSubmit={cadTaks} />
+      <Tasks data={tasksData} />
     </PageDefault>
   );
 }

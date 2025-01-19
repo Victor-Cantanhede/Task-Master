@@ -1,0 +1,11 @@
+.PageContentsContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+}
+
+.PageContents {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+}

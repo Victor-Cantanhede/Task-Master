@@ -1,0 +1,54 @@
+.CadFormContainer {
+    padding: 10px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+
+    border-radius: 5px;
+    border: 1px solid var(--defaultContainerBorder1);
+}
+
+.CadFormContainer input, .CadFormContainer select, .CadFormContainer textarea {
+    min-height: max-content;
+    padding: 10px;
+
+    border-radius: 5px;
+    border: 1px solid var(--defaultContainerBorder1);
+
+    font-size: 1em;
+    resize: vertical;
+}
+
+.CadFormContainer input:focus, .CadFormContainer select:focus {
+    border: 1px solid var(--defaultInputsFocus1);
+
+    transition: 0.2s;
+}
+
+.CadFormContainer textarea:focus {
+    border: 1px solid var(--defaultInputsFocus1);
+}
+
+.CadFormContainer > .titlesAndDescriptionsContainer {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.categoriesContainer {
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+    gap: 10px;
+}
+
+.categoriesContainer > div {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.ButtonsContainer {
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 10px;
+}

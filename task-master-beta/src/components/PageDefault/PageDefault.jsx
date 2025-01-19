@@ -6,9 +6,9 @@ export default function PageDefault(props) {
     const content = props.children || 'Conteúdo da página...';
 
     return (
-        <div>
+        <div className={styles.PageContentsContainer}>
             <h2>{title}</h2>
-            <div>
+            <div className={styles.PageContents}>
                 {content}
             </div>
         </div>
