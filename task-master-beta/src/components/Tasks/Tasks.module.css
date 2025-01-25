@@ -1,0 +1,42 @@
+.allTasksContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+}
+
+.taskContainer {
+    padding: 10px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    gap: 10px;
+
+    border: 1px solid var(--defaultContainerBorder1);
+    border-radius: 5px;
+}
+
+.taskContents {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+}
+
+.taskTitle {
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--defaultContainerBorder1);
+}
+
+.taskCategories {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 30px;
+}
+
+.btnContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
