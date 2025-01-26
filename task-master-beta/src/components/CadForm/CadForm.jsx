@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Button from '../Button/Button';
 import WarnModal from '../WarnModal/WarnModal';
@@ -35,7 +36,7 @@ export default function CadForm(props) {
     /* Alterando state titulo (formatado) */
     function inputTituloPattern(value) {
         const tituloValue = value.target.value;
-        const formattedValue = tituloValue.toUpperCase().slice(0, 80);
+        const formattedValue = tituloValue.toUpperCase().slice(0, 60);
         setTitulo(() => formattedValue);
     }
 
@@ -45,24 +46,43 @@ export default function CadForm(props) {
         setDescricao(() => descricaoValue);
     }
 
+    /* Gerando ID único */
+    const uniqueId = uuidv4();
+
+    /* Gerando data e hora atual */
+    const dataHoraAtual = new Date().toLocaleString('pt-br');
+
     /* Retornando objeto com os states via props */
     function handleSubmit(e) {
         e.preventDefault();
-        const inputValue = {
+
+        const prazoParts = prazo.split('-');
+        const prazoDate = new Date(prazoParts[0], prazoParts[1] - 1, prazoParts[2]);
+        const dataAtual = new Date();
+
+        /* Verificando se o prazo é uma data válida (dia futuro) */
+        const isPrazoValid = prazoDate.getTime() > dataAtual.getTime();
+
+        /* Criando objeto newTask para passar ao componente pai */
+        const newTaks = {
+            id: uniqueId,
             titulo,
             descricao,
             categoria,
-            prazo,
-            responsavel
+            prazo: prazoDate.toLocaleDateString(`pt-br`),
+            responsavel,
+            dataHoraCadastro: dataHoraAtual,
+            ultimaAlteracao: false,
+            situacao: true
         };        
         
         /* Verificando se existem e quais campos estão vazios */
-        const emptyFields = Object.entries(inputValue)
+        const emptyFields = Object.entries(newTaks)
             .filter(([key, value]) => !value)
             .map(([key]) => key);
 
         /* Enviando dados ao objeto warnProps para apresentar mensagem na tela*/
-        if (emptyFields.length > 0) {
+        if (emptyFields.length > 1) {
             setWarnProps(() => ({
                 message: 'Ops... Todos os campos devem ser preenchidos!',
                 type: 'erro',
@@ -72,6 +92,18 @@ export default function CadForm(props) {
             return;
         }
 
+        /* Caso o prazo seja uma data inválida */
+        if (!isPrazoValid) {
+            setWarnProps(() => ({
+                message: 'Ops... Prazo inválido, preencha uma data futura!',
+                type: 'erro',
+                duration: 6000,
+                key: Date.now()
+            }));
+            return;
+        }
+
+        /* Sucesso no cadastro */
         setWarnProps(() => ({
             message: 'Cadastro realizado com sucesso!',
             type: 'confirm',
@@ -79,7 +111,7 @@ export default function CadForm(props) {
             key: Date.now()
         }));
 
-        props.onSubmit(inputValue);
+        props.onSubmit(newTaks);
         cleanInputs();
     }
 

@@ -49,8 +49,13 @@ export default function WarnModal({ warnProps }) {
     }, [warnProps.key]);
 
     useEffect(() => {
-        if (warnOn) {
+        if (warnOn && (warnProps.type === 'erro' || warnProps.type === 'warn')) {
             console.warn(warnProps.message);
+            return;
+        }
+        if (warnOn && warnProps.type === 'confirm') {
+            console.log(warnProps.message);
+            return;
         }
     }, [warnOn]);
 

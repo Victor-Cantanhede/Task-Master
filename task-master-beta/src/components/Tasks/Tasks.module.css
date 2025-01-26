@@ -5,8 +5,6 @@
 }
 
 .taskContainer {
-    padding: 10px;
-
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -14,9 +12,25 @@
 
     border: 1px solid var(--defaultContainerBorder1);
     border-radius: 5px;
+    overflow: hidden;
+
+    animation: cadTask 0.5s ease forwards;
+    will-change: height, opacity;
+}
+
+@keyframes cadTask {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: 130px;
+        opacity: 1;
+    }
 }
 
 .taskContents {
+    padding: 10px;
     display: flex;
     flex-flow: column nowrap;
     gap: 10px;
@@ -34,6 +48,7 @@
 }
 
 .btnContainer {
+    padding: 10px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
