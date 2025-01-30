@@ -9,19 +9,7 @@ import Tasks from "@/components/Tasks/Tasks";
 export default function Home() {
 
   /* State para armazenar os dados das tasks */
-  const [tasksData, setTasksData] = useState([
-    {
-      id: 1,
-      titulo: 'Título teste 001',
-      descricao: 'Descrição teste 001',
-      categoria: 'Trabalho',
-      prazo: '25/01/2025',
-      responsavel: 'Victor',
-      dataHoraCadastro: '20/01/2025, 12:45:03',
-      ultimaAlteracao: false,
-      situacao: true
-    }
-  ]);
+  const [tasksData, setTasksData] = useState([]);
 
   /* Cadastrando nova task */
   function cadTaks(newTask) {
