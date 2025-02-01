@@ -4,11 +4,13 @@ import styles from './Button.module.css';
 
 export default function Button(props) {
     const type = props.type;
+    const icon = props.icon;
     const value = props.value || 'Button...';
     const callFunction = props.onClick;
     const title = props.title;
 
     const style = {
+        width: `${props.width}`,
         color: `${props.color}`,
         background: `${props.background}`,
     };
@@ -62,7 +64,9 @@ export default function Button(props) {
                 onMouseEnter={showTitle} 
                 onMouseLeave={hideTitle} 
                 onClick={callFunction}
-            >{value}</button>
+            >
+                {icon}{value}
+            </button>
         </span>
     );
 }

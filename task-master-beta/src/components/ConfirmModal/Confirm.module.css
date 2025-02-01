@@ -1,0 +1,96 @@
+.backgroundModal {
+    height: 100dvh;
+    width: 100vw;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    animation: backgroundModalInner 0.5s linear forwards;
+}
+
+@keyframes backgroundModalInner {
+    0% {
+        background-color: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0);
+    }
+    100% {
+        background-color: rgba(0, 0, 0, 0.091);
+        backdrop-filter: blur(2px);
+    }
+}
+
+.ConfirmModalContainer {
+    width: max-content;
+    max-width: 100%;
+
+    padding: 10px;
+    /*border: 1px solid #b8b8b8;*/
+    border-radius: 5px;
+    
+    /*position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;*/
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.185);
+
+    animation: modalContainerInner 0.5s linear forwards;
+}
+
+@keyframes modalContainerInner {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.icoStyle {
+    height: 50px;
+    width: 50px;
+    border: 1px solid #ff7846;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icoStyle p {
+    color: #ff7846;
+    font-size: 3em;
+    font-weight: 100;
+}
+
+.ConfirmModalContainer h2 {
+    color: #3b3b3b;
+}
+
+.message {
+    color: #3b3b3b;
+}
+
+.btnConfirmContainer {
+    margin-top: 15px;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+}

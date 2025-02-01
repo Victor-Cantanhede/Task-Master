@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+
+import { ClipLoader } from 'react-spinners';
+import { SlCloudUpload } from "react-icons/sl";
+import { AiOutlineClear } from "react-icons/ai";
 
 import Button from '../Button/Button';
 import WarnModal from '../WarnModal/WarnModal';
@@ -7,6 +10,8 @@ import styles from './CadForm.module.css';
 
 
 export default function CadForm(props) {
+    const postTask = props.onSubmit;
+
     const categories = [
         {id: 1, value: 'Trabalho'},
         {id: 2, value: 'Estudos'},
@@ -16,8 +21,7 @@ export default function CadForm(props) {
     const agentes = [
         {id: 1, nome: 'Victor'},
         {id: 2, nome: 'Mateus'},
-        {id: 3, nome: 'Lucas'},
-        {id: 4, nome: 'Micaele'}
+        {id: 3, nome: 'Lucas'}
     ];
 
     /* STATES */
@@ -25,6 +29,11 @@ export default function CadForm(props) {
         message: null,
         type: null,
         duration: null
+    });
+
+    const [cadBtnValue, setCadBtnValue] = useState({
+        icon: <SlCloudUpload size={'1.3em'} />,
+        value: 'Cadastrar'
     });
 
     const [titulo, setTitulo] = useState('');
@@ -46,14 +55,8 @@ export default function CadForm(props) {
         setDescricao(() => descricaoValue);
     }
 
-    /* Gerando ID único */
-    const uniqueId = uuidv4();
-
-    /* Gerando data e hora atual */
-    const dataHoraAtual = new Date().toLocaleString('pt-br');
-
     /* Retornando objeto com os states via props */
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         const prazoParts = prazo.split('-');
@@ -65,15 +68,11 @@ export default function CadForm(props) {
 
         /* Criando objeto newTask para passar ao componente pai */
         const newTaks = {
-            id: uniqueId,
             titulo,
             descricao,
             categoria,
             prazo: prazoDate.toLocaleDateString(`pt-br`),
-            responsavel,
-            dataHoraCadastro: dataHoraAtual,
-            ultimaAlteracao: false,
-            situacao: true
+            responsavel
         };        
         
         /* Verificando se existem e quais campos estão vazios */
@@ -82,7 +81,7 @@ export default function CadForm(props) {
             .map(([key]) => key);
 
         /* Enviando dados ao objeto warnProps para apresentar mensagem na tela*/
-        if (emptyFields.length > 1) {
+        if (emptyFields.length > 0) {
             setWarnProps(() => ({
                 message: 'Ops... Todos os campos devem ser preenchidos!',
                 type: 'erro',
@@ -103,16 +102,49 @@ export default function CadForm(props) {
             return;
         }
 
-        /* Sucesso no cadastro */
-        setWarnProps(() => ({
-            message: 'Cadastro realizado com sucesso!',
-            type: 'confirm',
-            duration: 6000,
-            key: Date.now()
+        /* Ativando animação de loading no botão cadastrar */
+        setCadBtnValue(() => ({
+            icon: null,
+            value: <ClipLoader size={15} color='white' loading />
         }));
 
-        props.onSubmit(newTaks);
-        cleanInputs();
+        /* Enviando cadastro para o backend */
+        const success = await postTask(newTaks);
+
+        if (success) {
+
+            /* Sucesso no cadastro */
+            setWarnProps(() => ({
+                message: 'Cadastro realizado com sucesso!',
+                type: 'confirm',
+                duration: 6000,
+                key: Date.now()
+            }));
+
+            setCadBtnValue(() => ({
+                icon: <SlCloudUpload size={'1.3em'} />,
+                value: 'Cadastrar'
+            }));
+
+            cleanInputs();
+        }
+        else {
+
+            /* Falha no cadastro */
+            setWarnProps(() => ({
+                message: 'Erro no cadastro. Tente novamente mais tarde!',
+                type: 'erro',
+                duration: 6000,
+                key: Date.now()
+            }));
+
+            setCadBtnValue(() => ({
+                icon: <SlCloudUpload size={'1.3em'} />,
+                value: 'Cadastrar'
+            }));
+
+            console.error('Ocorreu um erro no servidor!');
+        }
     }
 
     /* Limpando valores dos inputs */
@@ -224,8 +256,21 @@ export default function CadForm(props) {
             </div>
 
             <div className={styles.ButtonsContainer}>
-                <Button type='submit' value='Cadastrar' />
-                <Button type='reset' value='Limpar' onClick={cleanInputs} />
+                <Button 
+                    width='100px'
+                    type='submit' 
+                    icon={cadBtnValue.icon}
+                    value={cadBtnValue.value} 
+                />
+
+                <Button 
+                    title='Limpar' 
+                    background='#ff3838' 
+                    type='reset' 
+                    icon={<AiOutlineClear size={'1.3em'} />}
+                    value=' ' 
+                    onClick={cleanInputs} 
+                />
             </div>
         </form>
     );
