@@ -1,7 +1,7 @@
 'use client'
 import { useTaskActions } from "@/services/useTaskActions";
-import CadForm from "@/components/CadForm/CadForm";
-import PageDefault from "@/components/PageDefault/PageDefault";
+import CadForm from "@/components/Pages/CadForm/CadForm";
+import PageDefault from "@/components/layout/PageDefault/PageDefault";
 import Tasks from "@/components/Tasks/Tasks";
 
 

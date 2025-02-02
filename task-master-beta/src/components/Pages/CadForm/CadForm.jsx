@@ -4,8 +4,8 @@ import { ClipLoader } from 'react-spinners';
 import { SlCloudUpload } from "react-icons/sl";
 import { AiOutlineClear } from "react-icons/ai";
 
-import Button from '../Button/Button';
-import WarnModal from '../WarnModal/WarnModal';
+import Button from '../../util/Button/Button';
+import WarnModal from '../../Moldals/WarnModal/WarnModal';
 import styles from './CadForm.module.css';
 
 

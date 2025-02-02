@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { SlArrowDown, SlMagnifier, SlPencil, SlTrash } from "react-icons/sl";
-import Button from '../Button/Button';
-import ConfirmModal from "../ConfirmModal/ConfirmModal";
-import WarnModal from "../WarnModal/WarnModal";
+
+import TaskDetalhes from "./TaskDetalhes/TaskDetalhes";
+import Button from '../util/Button/Button';
+import ConfirmModal from "../Moldals/ConfirmModal/ConfirmModal";
+import WarnModal from "../Moldals/WarnModal/WarnModal";
 import styles from './Tasks.module.css';
 
 
@@ -20,6 +22,10 @@ export default function Tasks(props) {
     /* State para controlar render do modal de confirmação */
     const [sureDelete, setSureDelete] = useState(false);
     const [deleteId, setDeleteId] = useState('');
+
+    /* State para controlar render do modal de detalhes da task */
+    const [detailsOn, setDetailsOn] = useState(false);
+    const [taskDetails, setTaskDetails] = useState({});
 
     /* Chamando modal de confirmação */
     function sureDeleteTask(id) {
@@ -56,19 +62,14 @@ export default function Tasks(props) {
         sureDeleteTask('');
     }
 
+    /* Função para mostrar modal com detalhes da task */
+    function showDetails(task) {
+        setDetailsOn(!detailsOn);
+        setTaskDetails(() => task);
+    }
+
     return (
         <div className={styles.allTasksContainer}>
-
-            <WarnModal warnProps={warnProps} />
-
-            {sureDelete && 
-                <ConfirmModal 
-                    title='Você tem certeza?' 
-                    message='Após confirmação, não será possível reverter esta ação!' 
-                    confirmAction={() => confirmDeleteTask()} 
-                    cancelAction={() => sureDeleteTask('')} 
-                />            
-            }
 
             {tasksData.map((task) => {
                 return (
@@ -103,6 +104,7 @@ export default function Tasks(props) {
                             <Button 
                                 title='Visualizar' 
                                 value={<SlMagnifier size={'1.1em'} />} 
+                                onClick={() => showDetails(task)} 
                             />
 
                             <Button 
@@ -120,6 +122,23 @@ export default function Tasks(props) {
                     </div>
                 );
             })}
+
+            {detailsOn && 
+                <TaskDetalhes 
+                    task={taskDetails} 
+                    cancelAction={showDetails} 
+                />}
+
+            <WarnModal warnProps={warnProps} />
+
+            {sureDelete && 
+                <ConfirmModal 
+                    title='Você tem certeza?' 
+                    message='Após confirmação, não será possível reverter esta ação!' 
+                    confirmAction={() => confirmDeleteTask()} 
+                    cancelAction={() => sureDeleteTask('')} 
+                />            
+            }
         </div>
     );
 }

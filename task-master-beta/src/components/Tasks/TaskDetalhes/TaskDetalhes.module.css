@@ -1,0 +1,113 @@
+.backgroundModal {
+    height: 100dvh;
+    width: 100vw;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    animation: backgroundModalInner 0.5s linear forwards;
+}
+
+@keyframes backgroundModalInner {
+    0% {
+        background-color: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0);
+    }
+    100% {
+        background-color: rgba(0, 0, 0, 0.091);
+        backdrop-filter: blur(2px);
+    }
+}
+
+.ModalContainer {
+    height: 600px;
+    max-height: 90dvh;
+    width: 500px;
+    max-width: 100%;
+
+    padding: 25px 10px 10px 10px;
+    border-radius: 5px;
+
+    display: flex;
+
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.185);
+
+    animation: modalContainerInner 0.5s linear forwards;
+}
+
+@keyframes modalContainerInner {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.taskInfo {
+    flex-grow: 1;
+    padding: 30px 10px 10px 10px;
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    border: 1px solid var(--defaultContainerBorder1);
+    border-radius: 5px;
+}
+
+.taskInfo .modalTitle {
+    width: max-content;
+    padding: 0 10px 0 10px;
+    border: 1px solid var(--defaultContainerBorder1);
+    border-radius: 20px;
+
+    position: absolute;
+    transform: translate(-5px, -44px);
+
+    background-color: white;
+}
+
+.modalCategories {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--defaultContainerBorder1);
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+}
+
+.containerDescricao {
+    margin-top: 15px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    overflow: hidden;
+
+    flex-grow: 1;
+    display: flex;
+
+    background-color: rgba(245, 245, 245, 0.637);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.096);
+}
+
+.containerDescricao div {
+    padding: 5px;
+    border-left: 3px solid rgba(216, 216, 216, 0.884);
+    overflow-y: auto;
+}
+
+.btnActionContainer {
+    margin-top: 15px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    gap: 10px;
+}
