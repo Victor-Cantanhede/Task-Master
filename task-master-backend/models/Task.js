@@ -24,8 +24,9 @@ const taskSchema = new Schema({
         required: true
     },
     situacao: {
-        type: Boolean,
-        default: true
+        type: String,
+        required: true,
+        default: 'Pendente'
     }
 },
 {timestamps: true});

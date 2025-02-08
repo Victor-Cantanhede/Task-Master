@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { ClipLoader } from "react-spinners";
 import { SlLike, SlDislike } from "react-icons/sl";
-import Button from "../../util/Button/Button";
+import Button from "../../Button/Button";
 import styles from './Confirm.module.css';
 
 

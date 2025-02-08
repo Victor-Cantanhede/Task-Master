@@ -81,7 +81,8 @@ const taskController = {
                 description: request.description,
                 category: request.category,
                 prazo: request.prazo,
-                responsavel: request.responsavel
+                responsavel: request.responsavel,
+                situacao: request.situacao || 'Pendente'
             };
 
             const updatedTask = await TaskModel.findByIdAndUpdate(id, task, {new: true});

@@ -51,10 +51,33 @@ export function useTaskActions() {
         }
     };
 
+    /* Função para atualizar/editar uma task */
+    const updateTask = async (task) => {
+        try {
+            const editedTask = {
+                _id: task._id,
+                title: task.titulo,
+                description: task.descricao,
+                category: task.categoria,
+                prazo: task.prazo,
+                responsavel: task.responsavel,
+                situacao: task.situacao
+            };
+
+            await api.put(`/Task/${editedTask._id}`, editedTask);
+            getTask();
+            return true; // Comunicando sucesso ao frontend
+        }
+        catch (error) {
+            console.log(`UPDATE ERROR: ${error}`);
+            return false; // Comunicando erro ao frontend
+        }
+    };
+
     /* useEffect para buscar as tasks quando o hook for usado */
     useEffect(() => {
         getTask();
     }, []);
 
-    return { tasksData, getTask, postTask, deleteTask };
+    return { tasksData, getTask, postTask, updateTask, deleteTask };
 }

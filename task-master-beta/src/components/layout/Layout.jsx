@@ -7,8 +7,8 @@ import styles from './Layout.module.css';
 export default function Layout(props) {
     const menuOptions = [
         {id: 1, icon: <SlNote />, title: 'Cadastro', link: '#'},
-        {id: 2, icon: <SlMagnifier />, title: 'Consulta', link: '#'},
-        {id: 3, icon: <SlInfo />, title: 'Suporte', link: '#'}
+        //{id: 2, icon: <SlMagnifier />, title: 'Consulta', link: '#'},
+        //{id: 3, icon: <SlInfo />, title: 'Suporte', link: '#'}
     ];
 
     return (
@@ -19,7 +19,7 @@ export default function Layout(props) {
                     <aside>
                         <div>
                             <h1>Task</h1>
-                            <h1>Master (logo)</h1>
+                            <h1>Master</h1>
                         </div>
                     </aside>
                     <nav>

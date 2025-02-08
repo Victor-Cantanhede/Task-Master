@@ -47,6 +47,36 @@
     gap: 30px;
 }
 
+.taskSituationPendente {
+    padding: 0 3px 0 3px;
+    border-radius: 10px;
+    border: 1px solid #ff3838;
+    text-align: center;
+    box-shadow: 0 0 5px #ff383862;
+
+    transition: 0.3s;
+}
+
+.taskSituationCompleted {
+    padding: 0 3px 0 3px;
+    border-radius: 10px;
+    border: 1px solid #11c011;
+    text-align: center;
+    box-shadow: 0 0 5px #11c0116c;
+
+    transition: 0.3s;
+}
+
+.taskSituationReab {
+    padding: 0 3px 0 3px;
+    border-radius: 10px;
+    border: 1px solid #fc940c;
+    text-align: center;
+    box-shadow: 0 0 5px #fc940c70;
+
+    transition: 0.3s;
+}
+
 .btnContainer {
     padding: 10px;
     display: flex;

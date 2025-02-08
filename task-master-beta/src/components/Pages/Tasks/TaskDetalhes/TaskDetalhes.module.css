@@ -62,6 +62,7 @@
 
     border: 1px solid var(--defaultContainerBorder1);
     border-radius: 5px;
+    overflow: hidden;
 }
 
 .taskInfo .modalTitle {
@@ -104,10 +105,46 @@
     overflow-y: auto;
 }
 
+.taskSituationPendente {
+    padding: 0 3px 0 3px;
+    border-radius: 10px;
+    border: 1px solid #ff3838;
+    text-align: center;
+    box-shadow: 0 0 5px #ff383862;
+
+    transition: 0.3s;
+}
+
+.taskSituationCompleted {
+    padding: 0 3px 0 3px;
+    border-radius: 10px;
+    border: 1px solid #11c011;
+    text-align: center;
+    box-shadow: 0 0 5px #11c0116c;
+
+    transition: 0.3s;
+}
+
+.taskSituationReab {
+    padding: 0 3px 0 3px;
+    border-radius: 10px;
+    border: 1px solid #fc940c;
+    text-align: center;
+    box-shadow: 0 0 5px #fc940c70;
+
+    transition: 0.3s;
+}
+
 .btnActionContainer {
     margin-top: 15px;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-end;
+    justify-content: space-between;
     gap: 10px;
+}
+
+.btnContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 5px;
 }
